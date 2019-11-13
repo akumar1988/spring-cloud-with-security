@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class HelloResource {
+public class AuthenticateController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
