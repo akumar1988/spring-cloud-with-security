@@ -56,7 +56,6 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
-
 }
 
 dependencyManagement {

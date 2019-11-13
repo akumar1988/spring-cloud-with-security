@@ -27,9 +27,9 @@ public class HelloResource {
     @Autowired
     private JwtUtil jwtTokenUtil;
 
-    @RequestMapping(value = {"/hello"},method = RequestMethod.GET)
+    @RequestMapping(value = {"/authorized"},method = RequestMethod.GET)
     public String hello() {
-        return "Hello World";
+        return "Anant!!!!!!!!! You Are Authorized Person ";
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
@@ -44,16 +44,5 @@ public class HelloResource {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
-    }
-
-    @RequestMapping(value = "/userId", method = RequestMethod.GET)
-    public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
-        /*WebClient.Builder builder = WebClient.builder();*/
-        UserRating ratings = restTemplate.getForObject("http://product-rating-service/ratingsdata/users/" + userId, UserRating.class);
-        return ratings.getUserRating().stream().map(rating -> {
-            Product product = restTemplate.getForObject("http://product-info-service/product/" + rating.getProductId(), Product.class);
-            return new CatalogItem(product.getName(), product.getDesc(), rating.getRating());
-        })
-                .collect(Collectors.toList());
     }
 }
