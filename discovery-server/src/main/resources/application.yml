@@ -1,0 +1,26 @@
+spring:
+ application:
+  name: discovery-server
+
+server:
+ port: 8761
+
+eureka:
+ client:
+  registerWithEureka: false
+  fetchRegistery: false
+  server:
+   waitTimeInMsWhenSyncEmpty: 0
+
+zuul:
+ prefix: /api
+ routes:
+  catalog-service:
+   path: /catalog-service/**
+   url: http://localhost:9090
+  product-info-service:
+   path: /product-info-service/**
+   url: http://localhost:8081
+  product-rating-service:
+   path: /product-rating-service/**
+   url: http://localhost:8082
